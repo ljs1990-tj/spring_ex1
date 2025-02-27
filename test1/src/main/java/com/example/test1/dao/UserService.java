@@ -37,6 +37,23 @@ public class UserService {
 		// resultMap : { list : [ {},{},{}] }
 		return resultMap;
 	}
+
+	public HashMap<String, Object> memberRemove(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		userMapper.memberDelete(map);
+		resultMap.put("result", "success");
+		return resultMap;
+	}
+
+	public HashMap<String, Object> testRemove(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		userMapper.testDelete(map);
+		
+		resultMap.put("result", "success");
+		return resultMap;
+	}
 }
 
 

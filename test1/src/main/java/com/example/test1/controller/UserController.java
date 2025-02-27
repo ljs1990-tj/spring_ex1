@@ -31,6 +31,12 @@ public class UserController {
         return "/member-list"; // login.jsp 파일을 실행
     }
 		
+	@RequestMapping("/test.do") 
+    public String test(Model model) throws Exception{
+
+        return "/test1"; // login.jsp 파일을 실행
+    }
+	
 	
 	@RequestMapping(value = "/login.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -48,6 +54,24 @@ public class UserController {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		
 		resultMap = userService.memberList(map);
+		return new Gson().toJson(resultMap);
+	}
+	
+	@RequestMapping(value = "/member/remove.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String memberRemove(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap = userService.memberRemove(map);
+		return new Gson().toJson(resultMap);
+	}
+	
+	@RequestMapping(value = "/test/remove.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String testRemove(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap = userService.testRemove(map);
 		return new Gson().toJson(resultMap);
 	}
 	
