@@ -39,5 +39,32 @@ public class MemberService {
 		
 		return resultMap;
 	}
+
+	public HashMap<String, Object> addMember(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		int num = memberMapper.insertMember(map);
+		resultMap.put("result", "success");
+		// if num > 0 데이터 삽입 잘 된거 
+		// 아니면 뭔가 문제 있는거
+		return resultMap;
+	}
+
+	public HashMap<String, Object> searchMember(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		Member member = memberMapper.selectMember(map);
+		
+		int count = member != null ? 1 : 0 ;
+		resultMap.put("count", count);
+//		int count = 0;
+//		if(member != null) {
+//			count = 1;
+//		} else {
+//			count = 0;
+//		}
+		
+		return resultMap;
+	}
 	
 }
