@@ -20,7 +20,11 @@
             내용 : {{info.contents}}
         </div>
         <div>
+            조회수 : {{info.cnt}}
+        </div>
+        <div v-if="sessionId == info.userId || sessionStatus == 'A'">
             <button @click="fnEdit">수정</button>
+            <button @click="fnRemove()">삭제</button>
         </div>
 	</div>
 </body>
@@ -30,14 +34,17 @@
         data() {
             return {
                 boardNo : "${map.boardNo}",
-                info : {}
+                info : {},
+                sessionId : "${sessionId}",
+                sessionStatus : "${sessionStatus}"
             };
         },
         methods: {
             fnGetBoard(){
 				var self = this;
 				var nparmap = {
-                    boardNo : self.boardNo
+                    boardNo : self.boardNo,
+                    option : "SELECT"
                 };
 				$.ajax({
 					url:"/board/info.dox",
@@ -52,6 +59,22 @@
             },
             fnEdit : function(){
                 pageChange("/board/edit.do", {boardNo : this.boardNo});
+            },
+            fnRemove : function(){
+                var self = this;
+				var nparmap = {
+                    boardNo : self.boardNo
+                };
+				$.ajax({
+					url:"/board/remove.dox",
+					dataType:"json",	
+					type : "POST", 
+					data : nparmap,
+					success : function(data) { 
+						alert("삭제되었습니다.");
+                        location.href = "/board/list.do";
+					}
+				});
             }
 
         },

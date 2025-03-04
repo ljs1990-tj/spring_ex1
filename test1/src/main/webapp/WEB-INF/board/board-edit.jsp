@@ -22,7 +22,7 @@
             내용 : <textarea v-model="info.contents" cols="50" rows="20"></textarea>
         </div>
         <div>
-            <button @click="fnSave">저장</button>
+            <button @click="fnEdit">저장</button>
         </div>
 	</div>
 </body>
@@ -39,7 +39,8 @@
             fnGetBoard(){
 				var self = this;
 				var nparmap = {
-                    boardNo : self.boardNo
+                    boardNo : self.boardNo,
+                    option : "UPDATE"
                 };
 				$.ajax({
 					url:"/board/info.dox",
@@ -49,6 +50,26 @@
 					success : function(data) { 
 						console.log(data);
                         self.info = data.info;
+					}
+				});
+            },
+            fnEdit :function(){
+                var self = this;
+				var nparmap = self.info;
+                // var nparmap = {
+                //     boardNo : self.boardNo,
+                //     title : self.info.title,
+                //     contents : self.info.contents
+                // };
+				$.ajax({
+					url:"/board/edit.dox",
+					dataType:"json",	
+					type : "POST", 
+					data : nparmap,
+					success : function(data) { 
+                       console.log(data);
+                       alert("수정되었습니다");
+                       location.href="/board/list.do";
 					}
 				});
             }

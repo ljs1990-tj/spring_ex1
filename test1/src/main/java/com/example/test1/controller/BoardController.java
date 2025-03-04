@@ -3,6 +3,7 @@ package com.example.test1.controller;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,10 +22,8 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-	
 	@RequestMapping("/board/list.do") 
     public String login(Model model) throws Exception{
-
         return "/board/board-list"; 
     }
 	
@@ -76,4 +75,23 @@ public class BoardController {
 		return new Gson().toJson(resultMap);
 	}
 	
+	// 게시글 수정
+	@RequestMapping(value = "/board/edit.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String boardEdit(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap = boardService.editBoard(map);
+		return new Gson().toJson(resultMap);
+	}
+	
+	// 게시글 삭제
+	@RequestMapping(value = "/board/remove.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String boardRemove(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap = boardService.boardRemove(map);
+		return new Gson().toJson(resultMap);
+	}
 }
