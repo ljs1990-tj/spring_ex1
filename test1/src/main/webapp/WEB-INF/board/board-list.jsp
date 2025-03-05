@@ -32,7 +32,7 @@
         </div>
 		<table>
             <tr>
-                <th><input type="checkbox"></th>
+                <th><input type="checkbox" @click="fnAllCheck"></th>
                 <th>번호</th>
                 <th>제목</th>
                 <th>작성자</th>
@@ -53,8 +53,17 @@
                 <td>{{item.cdateTime}}</td>
             </tr>
         </table>
+        <div>
+            <a id="index" href="javascript:;" v-for="num in index" @click="fnPage(num)">
+                <span v-if="page == num" class="bgcolor-gray color-blue">{{num}}
+                </span>
+                <span v-else class="color-black">{{num}}
+                </span>
+            </a>
+        </div>
         <button @click="fnAdd">글쓰기</button>
-        <button @click="fnRemove">테스트</button>
+        <button @click="fnRemove">삭제</button>
+        <div style="margin-top : 300px;"></div>
 	</div>
 </body>
 </html>
@@ -66,7 +75,11 @@
                 keyword : "",
                 searchOption : "all",
                 sessionStatus : "${sessionStatus}",
-                selectList : []
+                selectList : [],
+                checked : false,
+                pageSize : 5,
+                index : 0,
+                page: 1
             };
         },
         methods: {
@@ -74,7 +87,9 @@
 				var self = this;
 				var nparmap = {
                     keyword : self.keyword,
-                    searchOption : self.searchOption
+                    searchOption : self.searchOption,
+                    pageSize : self.pageSize,
+                    page : (self.page - 1) * self.pageSize
                 };
 				$.ajax({
 					url:"/board/list.dox",
@@ -84,6 +99,7 @@
 					success : function(data) { 
 						console.log(data);
                         self.list = data.list;
+                        self.index = Math.ceil(data.count / self.pageSize);
 					}
 				});
             },
@@ -112,9 +128,37 @@
             },
             fnRemove : function(){
                 let self = this;
-                console.log(self.selectList);
+				var nparmap = {
+                    selectList : JSON.stringify(self.selectList)
+                };
+				$.ajax({
+					url:"/board/remove-list.dox",
+					dataType:"json",	
+					type : "POST", 
+					data : nparmap,
+					success : function(data) { 
+						console.log(data);
+                        alert("삭제되었습니다!");
+                        self.fnBoardList();
+					}
+				});
+            },
+            fnAllCheck : function() {
+                let self = this;
+                self.checked = !self.checked;
+                if(self.checked){
+                    for(let i=0; i<self.list.length; i++){
+                        self.selectList.push(self.list[i].boardNo);
+                    }
+                } else {
+                    self.selectList = [];
+                }   
+            },
+            fnPage: function (num) {
+                let self = this;
+                self.page = num;
+                self.fnBoardList();
             }
-
         }, // methods
         mounted() {
             var self = this;

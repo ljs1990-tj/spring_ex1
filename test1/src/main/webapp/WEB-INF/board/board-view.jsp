@@ -8,6 +8,12 @@
 	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="/js/page-change.js"></script>
 	<title>첫번째 페이지</title>
+    <style>
+        .btn-link {
+            text-decoration: none;
+            color : red;
+        }
+    </style>
 </head>
 <style>
 </style>
@@ -26,6 +32,18 @@
             <button @click="fnEdit">수정</button>
             <button @click="fnRemove()">삭제</button>
         </div>
+        <hr>
+        <div v-for="item in cmtList">       
+            {{item.userId}} : {{item.contents}}
+            <template v-if="sessionId == item.userId || sessionStatus == 'A'">
+                <button class="btn-link" href="javascript:;">🖍</button>
+                <button class="btn-link" href="javascript:;">❌</button>
+            </template>
+           <hr>
+        </div>
+        <div>
+            <textarea cols="30" rows="5"></textarea><button>등록</button>
+        </div>
 	</div>
 </body>
 </html>
@@ -36,7 +54,8 @@
                 boardNo : "${map.boardNo}",
                 info : {},
                 sessionId : "${sessionId}",
-                sessionStatus : "${sessionStatus}"
+                sessionStatus : "${sessionStatus}",
+                cmtList : []
             };
         },
         methods: {
@@ -54,6 +73,7 @@
 					success : function(data) { 
 						console.log(data);
                         self.info = data.info;
+                        self.cmtList = data.cmtList;
 					}
 				});
             },
