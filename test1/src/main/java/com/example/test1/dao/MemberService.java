@@ -49,7 +49,8 @@ public class MemberService {
 		// 아니면 뭔가 문제 있는거
 		return resultMap;
 	}
-
+	
+	// 중복 체크
 	public HashMap<String, Object> searchMember(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -64,6 +65,19 @@ public class MemberService {
 //			count = 0;
 //		}
 		
+		return resultMap;
+	}
+
+	public HashMap<String, Object> getMember(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		Member member = memberMapper.selectMember(map);
+		if(member != null) {
+			resultMap.put("member", member);
+			resultMap.put("result", "success");
+		} else {
+			resultMap.put("result", "fail");
+		}
 		return resultMap;
 	}
 	

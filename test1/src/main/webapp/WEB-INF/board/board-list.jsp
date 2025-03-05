@@ -32,6 +32,7 @@
         </div>
 		<table>
             <tr>
+                <th><input type="checkbox"></th>
                 <th>번호</th>
                 <th>제목</th>
                 <th>작성자</th>
@@ -39,16 +40,21 @@
                 <th>작성일</th> 
             </tr>
             <tr v-for="item in list">
+                <td><input type="checkbox" :value="item.boardNo" v-model="selectList"></td>
                 <td>{{item.boardNo}}</td>
                 <td>
                     <a href="javascript:;" @click="fnView(item.boardNo)">{{item.title}}</a>
                 </td>
-                <td>{{item.userName}}</td>
+                <td>
+                    <a v-if="sessionStatus == 'A'" href="javascript:;" @click="fnGetUser(item.userId)">{{item.userName}}</a>
+                    <a v-else>{{item.userName}}</a>
+                </td>
                 <td>{{item.cnt}}</td>
                 <td>{{item.cdateTime}}</td>
             </tr>
         </table>
         <button @click="fnAdd">글쓰기</button>
+        <button @click="fnRemove">테스트</button>
 	</div>
 </body>
 </html>
@@ -58,7 +64,9 @@
             return {
                 list : [],
                 keyword : "",
-                searchOption : "all"
+                searchOption : "all",
+                sessionStatus : "${sessionStatus}",
+                selectList : []
             };
         },
         methods: {
@@ -86,8 +94,28 @@
             },
             fnView : function(boardNo){
                 pageChange("/board/view.do", {boardNo : boardNo});
+            },
+            fnGetUser : function(userId){
+                var self = this;
+				var nparmap = {
+                    userId : userId
+                };
+				$.ajax({
+					url:"/member/get.dox",
+					dataType:"json",	
+					type : "POST", 
+					data : nparmap,
+					success : function(data) { 
+						console.log(data);
+					}
+				});
+            },
+            fnRemove : function(){
+                let self = this;
+                console.log(self.selectList);
             }
-        },
+
+        }, // methods
         mounted() {
             var self = this;
             self.fnBoardList();

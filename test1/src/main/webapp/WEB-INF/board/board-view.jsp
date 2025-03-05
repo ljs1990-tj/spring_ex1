@@ -17,7 +17,7 @@
             제목 : {{info.title}}
         </div>
         <div>
-            내용 : {{info.contents}}
+            내용 : <div v-html="info.contents"></div>
         </div>
         <div>
             조회수 : {{info.cnt}}
