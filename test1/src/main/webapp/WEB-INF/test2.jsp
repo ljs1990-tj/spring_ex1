@@ -12,14 +12,7 @@
 </style>
 <body>
 	<div id="app">
-		<div>
-			아이디 : <input v-model="userId">  
-		</div>
-		<div>
-			비밀번호 : <input v-model="pwd">  
-		</div>
-		<button @click="fnLogin">로그인</button>
-		<button @click="fnSearchPwd">비밀번호 찾기</button>
+		
 	</div>
 </body>
 </html>
@@ -27,36 +20,23 @@
     const app = Vue.createApp({
         data() {
             return {
-                userId : "",
-				pwd : ""				
+                
             };
         },
         methods: {
             fnLogin(){
 				var self = this;
-				var nparmap = {
-					userId : self.userId,
-					pwd : self.pwd
-				};
+				var nparmap = {};
 				$.ajax({
-					url:"/member/login.dox",
+					url:"login.dox",
 					dataType:"json",	
 					type : "POST", 
 					data : nparmap,
 					success : function(data) { 
 						console.log(data);
-						if(data.result == "success"){
-							alert(data.member.userName + "님 환영합니다!");
-							location.href="/board/list.do";
-						} else {
-							alert("아이디/패스워드 확인하세요.");
-						}
 					}
 				});
-            },
-			fnSearchPwd : function (){
-				location.href="/member/pwd.do";
-			}
+            }
         },
         mounted() {
             var self = this;
@@ -64,4 +44,3 @@
     });
     app.mount('#app');
 </script>
-​

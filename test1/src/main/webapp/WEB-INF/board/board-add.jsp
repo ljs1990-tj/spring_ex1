@@ -14,6 +14,7 @@
             div {
                 margin-top: 5px;
             }
+
             .ql-container {
                 height: 80%;
             }
@@ -25,11 +26,15 @@
     <body>
         <div id="app">
             <div> 제목 : <input v-model="title"> </div>
+            <div>
+                <input type="file" id="file1" name="file1" accept=".jpg, .png">
+            </div>
             <div style="width: 500px; height: 300px;">
                 <div id="editor"></div>
             </div>
             <div>
                 <button @click="fnSave">저장</button>
+                <button @click="fnAdd">파일 저장</button>
             </div>
         </div>
     </body>
@@ -60,6 +65,28 @@
                         success: function (data) {
                             console.log(data);
                             alert("저장되었습니다.");
+                            if($("#file1")[0].files.length > 0){
+                                var form = new FormData();                       
+                                form.append("file1", $("#file1")[0].files[0]);
+                                form.append("boardNo", data.boardNo); // 임시 pk
+                                self.upload(form);
+                            } else {
+                                location.href = "/board/list.do";
+                            }
+                            
+                        }
+                    });
+                },              
+                // 파일 업로드
+                upload: function (form) {
+                    var self = this;
+                    $.ajax({
+                        url: "/fileUpload.dox"
+                        , type: "POST"
+                        , processData: false
+                        , contentType: false
+                        , data: form
+                        , success: function (response) {
                             location.href = "/board/list.do";
                         }
                     });

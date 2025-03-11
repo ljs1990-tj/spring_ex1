@@ -1,0 +1,136 @@
+/* 기본적인 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* 배경색을 밝게 설정 */
+}
+
+/* 헤더 스타일 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #e9f0e9;
+    color: white;
+    height: 100px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 헤더에 그림자 효과 */
+}
+
+.logo img {
+    
+	width: 150px;
+	height: auto;
+    /* 로고 크기 조정 */
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    gap: 60px;
+    list-style: none;
+}
+
+nav li {
+    position: relative;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #ff6600; /* 메뉴에 마우스를 올리면 오렌지색으로 변하게 */
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 35px;
+    left: 0;
+    background-color: #333;
+    padding: 10px 0;
+    list-style: none;
+    display: none;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li a {
+    padding: 8px 20px;
+    font-size: 16px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-bar input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar input:focus {
+    border-color: #ff6600;
+}
+
+.search-bar button {
+    padding: 8px 15px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #e65c00;
+}
+
+.login-btn {
+    display: flex;
+    align-items: center;
+}
+
+.login-btn button {
+    padding: 8px 20px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn button:hover {
+    background-color: #e65c00;
+}
+
+.link {
+    color : black;
+    font-size: 20px;
+}

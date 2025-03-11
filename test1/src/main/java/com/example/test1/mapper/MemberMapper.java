@@ -15,4 +15,6 @@ public interface MemberMapper {
 
 	Member selectMember(HashMap<String, Object> map);
 
+	int updatePwd(HashMap<String, Object> map);
+
 }

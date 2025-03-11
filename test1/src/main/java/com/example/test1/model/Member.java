@@ -1,12 +1,12 @@
 package com.example.test1.model;
 
-public class Member {
+import lombok.Data;
 
+public class Member {
 	private String userId;
 	private String userName;
 	private String address;
 	private String status;
-	
 	public String getUserId() {
 		return userId;
 	}

@@ -20,4 +20,11 @@
 		WHERE USERID = #{userId}
 	</select>
 	
+	<update id="updatePwd" parameterType="hashmap">
+		UPDATE MEMBER
+		SET
+			PASSWORD = #{pwd}
+		WHERE USERID = #{userId}
+	</update>
+	
 </mapper>

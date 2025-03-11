@@ -33,10 +33,28 @@ public class MemberController {
         return "/member/member-add"; 
     }
 	
+	@RequestMapping("/member/pwd.do") 
+    public String pwd(Model model) throws Exception{
+		
+        return "/member/pwd-search"; 
+    }
+	
 	@RequestMapping("/addr.do") 
     public String addr(Model model) throws Exception{
 		
         return "/jusoPopup"; 
+    }
+	
+	@RequestMapping("/pay.do") 
+    public String pay(Model model) throws Exception{
+		
+        return "/pay"; 
+    }
+	
+	@RequestMapping("/auth.do") 
+    public String auth(Model model) throws Exception{
+		
+        return "/auth"; 
     }
 	
 	// 로그인
@@ -75,6 +93,15 @@ public class MemberController {
 	public String get(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap = memberService.getMember(map); 
+		return new Gson().toJson(resultMap);
+	}
+	
+	// 비밀번호 변경
+	@RequestMapping(value = "/member/pwd.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String pwd(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = memberService.editPwd(map); 
 		return new Gson().toJson(resultMap);
 	}
 }
