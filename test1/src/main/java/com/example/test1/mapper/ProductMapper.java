@@ -16,4 +16,6 @@ public interface ProductMapper {
 	
 	List<Product> selectProductImg(HashMap<String, Object> map);
 
+	int insertProduct(HashMap<String, Object> map);
+
 }

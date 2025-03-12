@@ -21,4 +21,22 @@
 		FROM TBL_PRODUCT_IMG
 		WHERE ITEM_NO = #{itemNo}
 	</select>
+	
+	<insert id="insertProduct" parameterType="hashmap" useGeneratedKeys="true" keyColumn="ITEM_NO" keyProperty="itemNo">
+		INSERT INTO TBL_PRODUCT
+		VALUES(PRODUCT_SEQ.NEXTVAL, #{itemName}, #{price}, #{itemInfo})
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

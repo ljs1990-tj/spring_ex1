@@ -66,7 +66,7 @@
 
             <!-- 로그인 버튼 -->
             <div class="login-btn">
-                <button>로그인</button>
+                <a href="/member/login.do"><button>로그인</button></a>
             </div>
         </header>
     </div>
@@ -78,7 +78,9 @@
                     list: []
                 };
             },
-            methods: {},
+            methods: {
+               
+            },
             mounted() {
                 var self = this;
             }

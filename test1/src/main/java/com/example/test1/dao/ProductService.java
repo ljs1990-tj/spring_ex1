@@ -36,5 +36,18 @@ public class ProductService {
 
 		return resultMap;
 	}
+
+	public HashMap<String, Object> addProduct(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		int num = productMapper.insertProduct(map);
+		if(num > 0) {
+			resultMap.put("itemNo", map.get("itemNo"));
+			resultMap.put("result", "success");
+		} else {
+			resultMap.put("result", "fail");
+		}
+		return resultMap;
+	}
 	
 }

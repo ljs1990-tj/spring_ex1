@@ -27,7 +27,7 @@
         <div id="app">
             <div> 제목 : <input v-model="title"> </div>
             <div>
-                <input type="file" id="file1" name="file1" accept=".jpg, .png">
+                <input type="file" id="file1" name="file1" accept=".jpg, .png" multiple>
             </div>
             <div style="width: 500px; height: 300px;">
                 <div id="editor"></div>
@@ -67,7 +67,10 @@
                             alert("저장되었습니다.");
                             if($("#file1")[0].files.length > 0){
                                 var form = new FormData();                       
-                                form.append("file1", $("#file1")[0].files[0]);
+                                // form.append("file1", $("#file1")[0].files[0]);
+                                for(let i=0; i<$("#file1")[0].files.length; i++){
+                                    form.append("file1", $("#file1")[0].files[i]);
+                                }
                                 form.append("boardNo", data.boardNo); // 임시 pk
                                 self.upload(form);
                             } else {
