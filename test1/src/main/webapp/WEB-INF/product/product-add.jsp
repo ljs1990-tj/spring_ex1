@@ -144,7 +144,7 @@
                     , data: form
                     , success: function (response) {
                         alert("저장되었습니다!");
-                        location.href = "/board/list.do";
+                        location.href = "/product/list.do";
                     }
                 });
             }

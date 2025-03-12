@@ -49,5 +49,15 @@ public class ProductService {
 		}
 		return resultMap;
 	}
+
+	public void addProductFile(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		try {
+			 productMapper.insertProductFile(map);
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+	}
 	
 }

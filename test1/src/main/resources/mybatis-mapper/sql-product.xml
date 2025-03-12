@@ -27,7 +27,10 @@
 		VALUES(PRODUCT_SEQ.NEXTVAL, #{itemName}, #{price}, #{itemInfo})
 	</insert>
 	
-	
+	<insert id="insertProductFile" parameterType="hashmap">
+		INSERT INTO TBL_PRODUCT_IMG
+		VALUES(#{itemNo}, #{path}, #{filename}, #{thumbNail})
+	</insert>
 	
 	
 	
