@@ -9,7 +9,7 @@
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="/js/page-change.js"></script>
-    <title>쇼핑몰 헤더</title>
+    <title>쇼핑몰</title>
     <link rel="stylesheet" href="../css/header.css">
     <style>
         
@@ -29,7 +29,17 @@
             <!-- 네비게이션 메뉴 -->
             <nav>
                 <ul>
-                    <li class="dropdown">
+                    <li v-for="main in mainList" class="dropdown">
+                        <a class="link" href="#">{{main.menuName}}</a>
+                        <ul class="dropdown-menu">
+                            <template v-for="sub in subList">
+                                <li v-if="main.menuId == sub.parentId"><a href="#">{{sub.menuName}}</a></li>
+                            </template>
+                        </ul>
+                    </li>
+
+
+                    <!-- <li class="dropdown">
                         <a class="link" href="#">한식</a>
                         <ul class="dropdown-menu">
                             <li><a href="#">비빔밥</a></li>
@@ -54,7 +64,7 @@
                         </ul>
                     </li>
                     <li><a class="link" href="#">디저트</a></li>
-                    <li><a class="link" href="#">음료</a></li>
+                    <li><a class="link" href="#">음료</a></li> -->
                 </ul>
             </nav>
 
@@ -75,14 +85,30 @@
         const header = Vue.createApp({
             data() {
                 return {
-                    list: []
+                    mainList : [],
+                    subList : []
                 };
             },
             methods: {
-               
+                fnMenu(){
+                    var self = this;
+                    var nparmap = {};
+                    $.ajax({
+                        url:"/menu.dox",
+                        dataType:"json",	
+                        type : "POST", 
+                        data : nparmap,
+                        success : function(data) { 
+                            console.log(data);
+                            self.mainList = data.mainList;
+                            self.subList = data.subList;
+                        }
+                    });
+                }              
             },
             mounted() {
                 var self = this;
+                self.fnMenu();
             }
         });
         header.mount('#header');

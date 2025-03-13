@@ -9,7 +9,7 @@
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="/js/page-change.js"></script>
-    <title>쇼핑몰 헤더</title>
+    <title>쇼핑몰</title>
     <link rel="stylesheet" href="../css/product-style.css">
 </head>
 
