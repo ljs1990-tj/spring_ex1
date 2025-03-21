@@ -20,6 +20,11 @@
 		</div>
 		<button @click="fnLogin">로그인</button>
 		<button @click="fnSearchPwd">비밀번호 찾기</button>
+		<div>
+			<a :href="location">
+				<img src="../img/kakao.png">
+			</a>
+		</div>
 	</div>
 </body>
 </html>
@@ -28,7 +33,8 @@
         data() {
             return {
                 userId : "",
-				pwd : ""				
+				pwd : "",
+				location : "${location}"					
             };
         },
         methods: {

@@ -7,6 +7,7 @@
 		SELECT * 
 		FROM TBL_PRODUCT P
 		INNER JOIN TBL_PRODUCT_IMG I ON P.ITEM_NO = I.ITEM_NO AND I.THUMBNAIL = 'Y'
+		WHERE ITEM_NAME LIKE '%' || #{keyword} || '%' 
 	</select>
 	
 	<select id="selectProduct" parameterType="hashmap" resultType="com.example.test1.model.Product">

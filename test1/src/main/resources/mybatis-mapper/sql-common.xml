@@ -19,4 +19,11 @@
 			AND DEPTH = 2
 		</if>
 	</select>
+	<insert id="insertPayment" parameterType="hashmap">
+		INSERT INTO PAYMENT_HISTORY
+		VALUES(#{orderId}, #{userId}, #{price}, #{itemNo}, SYSDATE)
+	</insert>
+	
+	
+	
 </mapper>

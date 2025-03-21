@@ -16,7 +16,6 @@
 <body>
     <jsp:include page="../common/header.jsp" />
     <div id="app">
-        
         <main>
             <section class="product-list">
                 <!-- 제품 항목 -->           
@@ -32,16 +31,20 @@
 </body>
 </html>
 <script>
-    const app = Vue.createApp({
+    let app = Vue.createApp({
         data() {
             return {
-                list : []
+                list : [],
+                code : ""
             };
         },
         methods: {
-            fnProductList() {
+            fnProductList(keyword) {
                 var self = this;
-                var nparmap = {};
+                console.log(keyword);
+                var nparmap = {
+                    keyword : keyword
+                };
                 $.ajax({
                     url: "/product/list.dox",
                     dataType: "json",
@@ -50,6 +53,23 @@
                     success: function (data) {
                         console.log(data);
                         self.list = data.list;
+                        
+                    }
+                });
+            },
+            fnKaKao(keyword) {
+                var self = this;
+                var nparmap = {
+                    code : self.code
+                };
+                $.ajax({
+                    url: "/kakao.dox",
+                    dataType: "json",
+                    type: "POST",
+                    data: nparmap,
+                    success: function (data) {
+                        console.log(data);
+                        
                     }
                 });
             },
@@ -59,8 +79,16 @@
         },
         mounted() {
             var self = this;
-            self.fnProductList();
+            const queryParams = new URLSearchParams(window.location.search);
+            self.code = queryParams.get('code') || ""; 
+            // console.log(self.code);
+            if(self.code != ""){
+                self.fnKaKao();
+            }           
+            self.fnProductList("");
         }
     });
+    
     app.mount('#app');
+    
 </script>

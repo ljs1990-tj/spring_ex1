@@ -4,6 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    
     <title>첫번째 페이지</title>
     <style>
         body {
@@ -75,14 +76,17 @@
     </style>
 </head>
 <body>
-    <jsp:include page="../common/header.jsp" />
+    <jsp:include page="../common/header.jsp"/>
     <div id="app">
         <h1>제품 등록</h1>
         <div class="form-group">
             <input placeholder="제품명을 입력하세요" v-model="itemName">
         </div>
+        <div style="margin-bottom: 20px;">
+            썸네일 : <input type="file" id="thumbFile" name="thumbFile" accept=".jpg, .png">
+        </div>
         <div>
-            <input type="file" id="file1" name="file1" accept=".jpg, .png" multiple>
+            제품설명 : <input type="file" id="file1" name="file1" accept=".jpg, .png" multiple>
         </div>
         <br>
         <div class="form-group">
@@ -120,11 +124,14 @@
 					data : nparmap,
 					success : function(data) { 
 						console.log(data);
-                        if($("#file1")[0].files.length > 0){
+                        if($("#file1")[0].files.length > 0 && $("#thumbFile")[0].files.length > 0){
                             var form = new FormData(); 
+                            var list = [];
+                            form.append("file1", $("#thumbFile")[0].files[0]);
                             for(let i=0; i<$("#file1")[0].files.length; i++){
                                 form.append("file1", $("#file1")[0].files[i]);
                             }
+                            
                             form.append("itemNo", data.itemNo); // 임시 pk
                             self.upload(form);
                         } else {

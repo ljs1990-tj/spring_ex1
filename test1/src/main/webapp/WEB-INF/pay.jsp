@@ -28,12 +28,13 @@
         },
         methods: {
 			fnPayment(){
+				let self = this;
 				IMP.request_pay({
 				    pg: "kakaopay",
 				    pay_method: "card",
 				    merchant_uid: "merchant_" + new Date().getTime(),
 				    name: "테스트 결제",
-				    amount: 1,
+				    amount: self.info.price,
 				    buyer_tel: "010-0000-0000",
 				  }	, function (rsp) { // callback
 			   	      if (rsp.success) {

@@ -80,10 +80,7 @@
             methods: {
                 fnJoin() {
                     var self = this;
-                    if(self.joinFlg == false){
-                        alert("문자 인증 먼저 하셈");
-                        return;
-                    }
+                    
                     var nparmap = self.user;
                     $.ajax({
                         url: "/member/add.dox",
